@@ -1,0 +1,12 @@
+<launch>
+  <node name="husky_alpha_path_executor" pkg= "autonomous_bounding_overwatch" type="robot_alpha_path_executor.py" respawn="false" output="screen" />
+  <node name="robot_beta_path_executor" pkg= "autonomous_bounding_overwatch" type= "robot_beta_path_executor.py" respawn="false" output="screen"/>
+  <node name="robot_gamma_path_executor" pkg= "autonomous_bounding_overwatch" type= "robot_gamma_path_executor.py" respawn="false" output="screen"/>
+
+   <!--  robots' situational awareness information-->
+  <node pkg="autonomous_bounding_overwatch" name="situational_awareness_node" type="robots_situational_awareness.py" respawn="false" output="screen" />
+
+<!--  <node name="single_robot_global_planner" pkg="trust_motion_plannar" type="single_robot_global_planner.py" respawn="false" output="screen"/>-->
+  <node name="two_squads_global_planner" pkg="autonomous_bounding_overwatch" type="two_squads_bo_global_planner.py" respawn="false" output="screen"/>
+
+</launch>

@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<!--
+Software License Agreement (BSD)
+
+\file      multi_husky_playpen.launch
+\authors   Paul Bovbel <pbovbel@clearpathrobotics.com
+\copyright Copyright (c) 2015, Clearpath Robotics, Inc., All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+the following conditions are met:
+ * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+   following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+   following disclaimer in the documentation and/or other materials provided with the distribution.
+ * Neither the name of Clearpath Robotics nor the names of its contributors may be used to endorse or promote
+   products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WAR-
+RANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, IN-
+DIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+<launch>
+
+  <arg name="husky_alpha_laser_enabled" default="true"/>
+  <arg name="husky_alpha_realsense_enabled" default="true"/>
+  <arg name="ur5_enabled" default="false"/>
+
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find autonomous_bounding_overwatch)/worlds/yazoo2.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+  <include file="$(find autonomous_bounding_overwatch)/launch/spawn_husky.launch">
+    <arg name="laser_enabled" value="$(arg husky_alpha_laser_enabled)"/>
+    <arg name="realsense_enabled" value="$(arg husky_alpha_realsense_enabled)"/>
+    <arg name="robot_namespace" value="/"/>
+    <arg name="multimaster" value="false"/>
+    <arg name="x" value="-60.0"/>
+    <arg name="y" value="-85.0"/>
+    <arg name="z" value="-14.20"/>
+    <arg name="yaw" value="0.0"/>
+  </include>
+
+  <!--- Run Move Base -->
+<!--  <group ns="husky_alpha">-->
+  <include file="$(find husky_navigation)/launch/move_base.launch">
+    <arg name="no_static_map" value="true"/>
+  </include>
+<!--  </group>-->
+
+  <!--BEGIN ROBOT BETA-->
+<!--  <arg name="map_file_a" default="willow_garage/willow_garage.yaml"/>-->
+  <include file="$(find summit_xl_gazebo)/launch/summit_xl_one_robot.launch">
+    <arg name="id_robot" value="summit_xl_beta"/>
+    <arg name="x_init_pose" value="-60.0"/>
+    <arg name="y_init_pose" value="-82.0"/>
+    <arg name="z_init_pose" value="-14.0"/>
+    <arg name="xacro_robot" value="summit_xl_std.urdf.xacro"/>
+    <arg name="launch_amcl_and_mapserver" value="false"/>
+    <arg name="launch_gmapping" value="false"/>
+<!--    <arg name="map_file" value="$(arg map_file_a)"/>-->
+    <arg name="launch_move_base" value="false"/>
+    <arg name="omni_drive" value="false"/>
+    <arg name="ros_planar_move_plugin" value="false"/>
+    <arg name="launch_pad" value="false"/>
+    <arg name="launch_advanced_simulation" value="false"/>
+    <arg name="use_gpu_for_simulation" value="false"/>
+    <arg name="has_pantilt_camera" default="false"/>
+    <!-- robot_a arm args -->
+    <arg name="launch_arm" value="false"/>
+    <arg name="launch_moveit_movegroup" value="false"/>
+  </include>
+
+  <!--BEGIN ROBOT GAMMA-->
+  <include file="$(find summit_xl_gazebo)/launch/summit_xl_one_robot.launch">
+    <arg name="id_robot" value="summit_xl_gamma"/>
+    <arg name="x_init_pose" value="-60.0"/>
+    <arg name="y_init_pose" value="-79.0"/>
+    <arg name="z_init_pose" value="-14.0"/>
+    <arg name="xacro_robot" value="summit_xl_std.urdf.xacro"/>
+    <arg name="launch_amcl_and_mapserver" value="false"/>
+    <arg name="launch_gmapping" value="false"/>
+<!--    <arg name="map_file" value="$(arg map_file_a)"/>-->
+    <arg name="launch_move_base" value="false"/>
+    <arg name="omni_drive" value="false"/>
+    <arg name="ros_planar_move_plugin" value="false"/>
+    <arg name="launch_pad" value="false"/>
+    <arg name="launch_advanced_simulation" value="false"/>
+    <arg name="use_gpu_for_simulation" value="false"/>
+    <arg name="has_pantilt_camera" default="false"/>
+    <!-- robot_a arm args -->
+    <arg name="launch_arm" value="false"/>
+    <arg name="launch_moveit_movegroup" value="false"/>
+  </include>
+
+  <!--  robots' situational awareness information-->
+<!--  <node pkg="trust_motion_plannar" name="situational_awareness_node" type="robots_situational_awareness.py" respawn="false" output="screen" />-->
+
+</launch>

@@ -1,0 +1,3 @@
+<launch>
+  <node name="no_gazebo_bo_global_planner" pkg="autonomous_bounding_overwatch" type="no_gazebo_bo_global_planner.py" respawn="false" output="screen"/>
+</launch>
