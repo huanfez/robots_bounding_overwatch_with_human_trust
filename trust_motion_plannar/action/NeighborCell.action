@@ -1,0 +1,17 @@
+# Define the goal
+int64 in_cell_x
+int64 in_cell_y
+int64 to_cell_x
+int64 to_cell_y
+---
+# Define the result
+int64 at_cell_x
+int64 at_cell_y
+float32 at_pos_x
+float32 at_pos_y
+---
+# Define the feedback
+int64 at_cell_x
+int64 at_cell_y
+float32 at_pos_x
+float32 at_pos_y

@@ -1,0 +1,21 @@
+<launch>
+  <node name="husky_alpha_path_executor" pkg= "trust_motion_plannar" type="robot_alpha_path_executor.py" respawn="false" output="screen" />
+  <node name="robot_beta_path_executor" pkg= "trust_motion_plannar" type= "robot_beta_path_executor.py" respawn="false" output="screen"/>
+  <node name="robot_gamma_path_executor" pkg= "trust_motion_plannar" type= "robot_gamma_path_executor.py" respawn="false" output="screen"/>
+  <node name="robot_delta_path_executor" pkg="trust_motion_plannar" type="robot_delta_path_executor.py" respawn="false" output="screen"/>
+
+   <!--  robots' situational awareness information-->
+<!--  <node pkg="trust_motion_plannar" name="situational_awareness_node" type="robots_situational_awareness.py" respawn="false" output="screen" />-->
+  <node pkg="trust_motion_plannar" name="human_trust_node" type="human_realtime_trust.py" respawn="false" output="screen" />
+
+<!--  <node name="single_robot_global_planner" pkg="trust_motion_plannar" type="single_robot_global_planner.py" respawn="false" output="screen"/>-->
+  <node name="two_squads_global_planner" pkg="trust_motion_plannar" type="two_squads_bi_global_planner.py" respawn="false" output="screen"/>
+
+  <node name="keyboard_teleop" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" respawn="false" output="screen">
+    <remap from="/joy_teleop/cmd_vel" to="/summit_xl_delta/cmd_vel"/>
+    <param name="speed" value="2.0"/>
+    <param name="turn" value="1.2"/>
+  </node>
+
+  <node pkg="rqt_gui" name="rqt_gui" type="rqt_gui" />
+</launch>

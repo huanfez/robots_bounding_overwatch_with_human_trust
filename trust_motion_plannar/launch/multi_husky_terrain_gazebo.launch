@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="husky_alpha_laser_enabled" default="true"/>
+  <arg name="husky_alpha_realsense_enabled" default="true"/>
+<!--  <arg name="husky_delta_laser_enabled" default="false"/>-->
+<!--  <arg name="husky_delta_realsense_enabled" default="false"/>-->
+
+  <arg name="ur5_enabled" default="false"/>
+
+
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find trust_motion_plannar)/worlds/yazoo4.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+  <include file="$(find trust_motion_plannar)/launch/spawn_husky.launch">
+    <arg name="laser_enabled" value="$(arg husky_alpha_laser_enabled)"/>
+    <arg name="realsense_enabled" value="$(arg husky_alpha_realsense_enabled)"/>
+    <arg name="robot_namespace" value="/"/>
+    <arg name="multimaster" value="false"/>
+    <arg name="x" value="-60.0"/>
+    <arg name="y" value="-88.0"/>
+    <arg name="z" value="-14.60"/>
+    <arg name="yaw" value="0.0"/>
+  </include>
+
+  <!--- Run Move Base -->
+<!--  <group ns="husky_alpha">-->
+  <include file="$(find husky_navigation)/launch/move_base.launch">
+    <arg name="no_static_map" value="true"/>
+  </include>
+<!--  </group>-->
+
+  <!--BEGIN ROBOT BETA-->
+<!--  <arg name="map_file_a" default="willow_garage/willow_garage.yaml"/>-->
+  <include file="$(find summit_xl_gazebo)/launch/summit_xl_one_robot.launch">
+    <arg name="id_robot" value="summit_xl_beta"/>
+    <arg name="x_init_pose" value="-60.0"/>
+    <arg name="y_init_pose" value="-85.0"/>
+    <arg name="z_init_pose" value="-14.6"/>
+    <arg name="xacro_robot" value="summit_xl_std.urdf.xacro"/>
+    <arg name="launch_amcl_and_mapserver" value="false"/>
+    <arg name="launch_gmapping" value="false"/>
+<!--    <arg name="map_file" value="$(arg map_file_a)"/>-->
+    <arg name="launch_move_base" value="false"/>
+    <arg name="omni_drive" value="false"/>
+    <arg name="ros_planar_move_plugin" value="false"/>
+    <arg name="launch_pad" value="false"/>
+    <arg name="launch_advanced_simulation" value="false"/>
+    <arg name="use_gpu_for_simulation" value="false"/>
+    <arg name="has_pantilt_camera" default="false"/>
+    <!-- robot_a arm args -->
+    <arg name="launch_arm" value="false"/>
+    <arg name="launch_moveit_movegroup" value="false"/>
+  </include>
+
+  <!--BEGIN ROBOT GAMMA-->
+  <include file="$(find summit_xl_gazebo)/launch/summit_xl_one_robot.launch">
+    <arg name="id_robot" value="summit_xl_gamma"/>
+    <arg name="x_init_pose" value="-60.0"/>
+    <arg name="y_init_pose" value="-82.0"/>
+    <arg name="z_init_pose" value="-14.6"/>
+    <arg name="xacro_robot" value="summit_xl_std.urdf.xacro"/>
+    <arg name="launch_amcl_and_mapserver" value="false"/>
+    <arg name="launch_gmapping" value="false"/>
+<!--    <arg name="map_file" value="$(arg map_file_a)"/>-->
+    <arg name="launch_move_base" value="false"/>
+    <arg name="omni_drive" value="false"/>
+    <arg name="ros_planar_move_plugin" value="false"/>
+    <arg name="launch_pad" value="false"/>
+    <arg name="launch_advanced_simulation" value="false"/>
+    <arg name="use_gpu_for_simulation" value="false"/>
+    <arg name="has_pantilt_camera" default="false"/>
+    <!-- robot_a arm args -->
+    <arg name="launch_arm" value="false"/>
+    <arg name="launch_moveit_movegroup" value="false"/>
+  </include>
+
+<!--  <include file="$(find husky_gazebo)/launch/spawn_husky.launch">-->
+<!--    <arg name="laser_enabled" value="$(arg husky_delta_laser_enabled)"/>-->
+<!--    <arg name="realsense_enabled" value="$(arg husky_delta_realsense_enabled)"/>-->
+<!--    <arg name="robot_namespace" value="husky_delta"/>-->
+<!--    <arg name="multimaster" value="false"/>-->
+<!--    <arg name="x" value="-30.0"/>-->
+<!--    <arg name="y" value="-85.0"/>-->
+<!--    <arg name="z" value="-14.20"/>-->
+<!--    <arg name="yaw" value="0.0"/>-->
+<!--  </include>-->
+
+  <!--BEGIN ROBOT DELTA-->
+  <include file="$(find summit_xl_gazebo)/launch/summit_xl_one_robot.launch">
+    <arg name="id_robot" value="summit_xl_delta"/>
+    <arg name="x_init_pose" value="-63.0"/>
+    <arg name="y_init_pose" value="-81.0"/>
+    <arg name="z_init_pose" value="-14.6"/>
+    <arg name="xacro_robot" value="summit_xl_std.urdf.xacro"/>
+    <arg name="launch_amcl_and_mapserver" value="false"/>
+    <arg name="launch_gmapping" value="false"/>
+<!--    <arg name="map_file" value="$(arg map_file_a)"/>-->
+    <arg name="launch_move_base" value="false"/>
+    <arg name="omni_drive" value="false"/>
+    <arg name="ros_planar_move_plugin" value="false"/>
+    <arg name="launch_pad" value="false"/>
+    <arg name="launch_advanced_simulation" value="false"/>
+    <arg name="use_gpu_for_simulation" value="false"/>
+    <arg name="has_pantilt_camera" default="false"/>
+    <!-- robot_a arm args -->
+    <arg name="launch_arm" value="false"/>
+    <arg name="launch_moveit_movegroup" value="false"/>
+  </include>
+
+  <!--  robots' situational awareness information-->
+  <node pkg="trust_motion_plannar" name="situational_awareness_node" type="robots_situational_awareness.py" respawn="false" output="screen" />
+
+</launch>
