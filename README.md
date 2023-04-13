@@ -1,4 +1,4 @@
-# hz_soro_trust_bo
+# Human-MRS bounding overwatch with Bayesian optimization online learning human trust dynamics
 
 This project includes two rospkgs: `autonomous_bounding_overwatch ` and ` trust_motion_plannar `. (Ubuntu 18.0 ROS Melodic)
 
