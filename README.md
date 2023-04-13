@@ -2,8 +2,6 @@
 
 This project includes two rospkgs: `autonomous_bounding_overwatch ` and ` trust_motion_plannar `. (Ubuntu 18.0 ROS Melodic)
 
-Directory: ~/catkin_ws_hz/src/ (on the Titan computer)
-
 ## 1. autonomous_bounding_overwatch
 It aims to verify that the Bayesian optimization can generate the posterior distribution approximating to the assigned simulated human hyperparameters. No human operated robot and only one platoon (3 robots) advances intermittently. The program relies on the assumed ground-truth value of trust model parameters and the autonomous robots' real-time sensing to generate trust feedback. We generate the simulated data with x^k_i = beta_true * z_sensing + noise, y^k_i = x^k_i - x^k-1_i + noise. 
 
