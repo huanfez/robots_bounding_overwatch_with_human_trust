@@ -24,6 +24,7 @@ Note1: we do not rely on a robot to generate the trust feedback data. The progra
 Note2: the output `which path: #` is the selected path for the data collection after each iteration of Bayesian optimization. `#` ranges from 0 ($\rho_1$) to 4 ($\rho_5$) for paths 1 to 5.
 
 ## 2. trust_motion_plannar
+![alt text](https://github.com/huanfez/robots_bounding_overwatch_with_human_trust/blob/main/results/hci.png?raw=true)
 It aims to verify that the Bayesian optimization can generate the posterior distribution of a human participant's trust model. Participant operated robot and one platoon (3 robots) advance intermittently.
 
 #### BOED is also compared with the stanard experimental design:
