@@ -1,5 +1,7 @@
 # Human-MRS bounding overwatch with Bayesian optimization online learning human trust dynamics
 
+![alt text](https://github.com/huanfez/robotsBoundingOverwatch/blob/main/default_gzclient_camera(1)-2022-04-22T16_08_11.130434.jpg?raw=true)
+
 This project includes two rospkgs: `autonomous_bounding_overwatch ` and ` trust_motion_plannar `. (Ubuntu 18.0 ROS Melodic)
 
 ## 1. autonomous_bounding_overwatch
