@@ -1,4 +1,4 @@
-# Human-MRS bounding overwatch with Bayesian optimization online learning human trust dynamics
+# Human-MRS Offroad with Bayesian optimization online learning human trust dynamics
 
 ![alt text](https://github.com/huanfez/robots_bounding_overwatch_with_human_trust/blob/main/results/ROS_3d_view.png?raw=true)
 
